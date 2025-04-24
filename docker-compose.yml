@@ -1,0 +1,21 @@
+services:
+  go-app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: users_management
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data: {}
